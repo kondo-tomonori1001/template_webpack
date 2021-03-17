@@ -7,6 +7,24 @@ module.exports = {
     path:path.join(__dirname,'dist'),
     filename:"main.js"
   },
+  module: {
+    rules: [
+      {
+        test:/\.js$/,
+        use:[
+          {
+            loader:"babel-loader",
+            options: {
+              presets: [
+                "@babel/preset-env",
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  },
+  target: ["web","es5"],
   plugins:[
     new HtmlWebpackPlugin({
       filename: `./index.html`,

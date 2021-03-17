@@ -1,3 +1,4 @@
 export const top = () => {
-  console.log('hello');
+  const text = "Hi"
+  console.log(`${text} world`)
 }
