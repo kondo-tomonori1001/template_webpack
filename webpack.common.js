@@ -2,10 +2,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry:`./src/common/scripts/index.js`,
+  entry:{
+    'main': `./src/common/scripts/main/index.js`,
+    'sampleApp': './src/common/scripts/sampleApp/index.js'
+  },
   output:{
     path:path.join(__dirname,'dist'),
-    filename:"main.js"
+    filename:"common/scripts/[name].js"
   },
   module: {
     rules: [
@@ -48,9 +51,15 @@ module.exports = {
   },
   target: ["web","es5"],
   plugins:[
+    // ===== html loader =====
     new HtmlWebpackPlugin({
       filename: `./index.html`,
-      template: `./src/index.html`
+      template: `./src/index.html`,
+    }),
+    new HtmlWebpackPlugin({
+      filename: `./contact/index.html`,
+      template: `./src/contact/index.html`,
+      chunks:['main'],
     })
   ],
 }
