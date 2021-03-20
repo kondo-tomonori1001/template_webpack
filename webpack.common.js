@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
   entry:{
@@ -46,6 +47,11 @@ module.exports = {
             }
           }
         ]
+      },
+      // ===== Vue =====
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
       }
     ]
   },
@@ -60,6 +66,13 @@ module.exports = {
       filename: `./contact/index.html`,
       template: `./src/contact/index.html`,
       chunks:['main'],
-    })
+    }),
+    new VueLoaderPlugin(),
   ],
+  resolve: {
+    extensions: ['.js', '.vue'], //jsファイルとvueファイルの拡張子の省略（'./foo.js'を'./foo'と省略して書けるようになる）
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
+    }
+  }
 }
